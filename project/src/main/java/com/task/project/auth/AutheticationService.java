@@ -35,6 +35,21 @@ public class AutheticationService {
     @Autowired
     private final AuthenticationManager authenticationManager;
 
+    /**
+     * The register function takes a RegisterRequest object, creates a new User
+     * object with the provided
+     * information, saves it to the userRepository, generates a JWT token for the
+     * user, saves the token
+     * to the user, and returns an AuthenticationResponse object with the token.
+     * 
+     * @param request The "request" parameter is an object of type
+     *                "RegisterRequest". It contains the
+     *                information needed to register a new user, such as the user's
+     *                name, email, password, address, and
+     *                bio.
+     * @return The method is returning an instance of the AuthenticationResponse
+     *         class.
+     */
     public AuthenticationResponse register(ResgisterRequest request) {
         var user = User.builder()
                 .name(request.getName())
@@ -76,6 +91,19 @@ public class AutheticationService {
         tokenRepository.save(token);
     }
 
+    /**
+     * The `authenticate` function takes an `AuthenticationRequest` object,
+     * authenticates the user,
+     * generates a JWT token, revokes all user tokens, saves the new token, and
+     * returns an
+     * `AuthenticationResponse` object containing the token.
+     * 
+     * @param request An object of type AuthenticationRequest, which contains the
+     *                email and password
+     *                entered by the user for authentication.
+     * @return The method is returning an instance of the AuthenticationResponse
+     *         class.
+     */
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
