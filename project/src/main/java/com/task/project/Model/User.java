@@ -27,10 +27,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -46,20 +42,75 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties("user")
     private List<Token> tokens;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @JsonIgnoreProperties("user")
-    private List<Post> posts;
-
-    private List<Integer> followersId;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonIgnoreProperties("user")
     private UserPhtoto userPhoto;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Token> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(List<Token> tokens) {
+        this.tokens = tokens;
+    }
+    public UserPhtoto getUserPhoto() {
+        return userPhoto;
+    }
+
+    public void setUserPhoto(UserPhtoto userPhoto) {
+        this.userPhoto = userPhoto;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
